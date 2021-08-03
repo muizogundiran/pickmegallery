@@ -1,21 +1,43 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { useFonts } from 'expo-font';
+import AppLoading from 'expo-app-loading';
+import { enableScreens } from 'react-native-screens';
+import { StyleSheet } from 'react-native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
+import Home from './pages/Home';
+import { ReactQueryConfigProvider } from 'react-query';
+
+
+const Stack = createStackNavigator();
 
 export default function App() {
+  enableScreens()
+  let [fontsLoaded] = useFonts({
+    'Cereal-Light': require('./assets/fonts/AirbnbCerealLight.ttf'),
+    'Cereal-Bold': require('./assets/fonts/AirbnbCerealBold.ttf'),
+    'Cereal-Medium': require('./assets/fonts/AirbnbCerealMedium.ttf'),
+  });
+
+  if (!fontsLoaded) {
+    return <AppLoading/>
+  }
+
+  const queryConfig = { queries: { refetchOnWindowFocus: false, infinite: false } };
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <ReactQueryConfigProvider config={queryConfig}>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Home"
+          component={Home}
+          options={{ headerShown : false }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+    </ReactQueryConfigProvider>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+
