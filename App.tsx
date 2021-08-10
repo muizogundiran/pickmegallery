@@ -6,7 +6,8 @@ import { StyleSheet } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import Home from './pages/Home';
-import { ReactQueryConfigProvider } from 'react-query';
+import { ReactQueryConfig, ReactQueryConfigProvider } from 'react-query';
+import Search from './pages/Search';
 
 
 const Stack = createStackNavigator();
@@ -23,7 +24,7 @@ export default function App() {
     return <AppLoading/>
   }
 
-  const queryConfig = { queries: { refetchOnWindowFocus: false, infinite: false } };
+  const queryConfig : ReactQueryConfig = { queries: { refetchOnWindowFocus: false , infinite : undefined } };
 
   return (
     <ReactQueryConfigProvider config={queryConfig}>
@@ -33,6 +34,17 @@ export default function App() {
           name="Home"
           component={Home}
           options={{ headerShown : false }}
+        />
+        <Stack.Screen
+          name="Search"
+          component={Search}
+          options={{ headerShown : false , cardStyleInterpolator : ({ current : { progress}}) => {
+            return {
+              cardStyle : {
+                opacity : progress
+              }
+            }
+          }}}
         />
       </Stack.Navigator>
     </NavigationContainer>
