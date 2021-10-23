@@ -23,7 +23,7 @@
     "react-native-safe-area-context": "3.3.2",
     "react-native-screens": "3.4.0",
     "react-native-web": "0.13.18",
-    "react-query": "2.23.1",
+    "react-query": "3.28.0",
     "tailwind-rn": "3.0.1"
   },
   "devDependencies": {
