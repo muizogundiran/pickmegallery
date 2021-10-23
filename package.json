@@ -21,8 +21,8 @@
     "react-native-gesture-handler": "1.10.3",
     "react-native-reanimated": "2.2.0",
     "react-native-safe-area-context": "3.3.2",
-    "react-native-screens": "3.8.0",
-    "react-native-web": "0.13.18",
+    "react-native-screens": "3.4.0",
+    "react-native-web": "0.17.5",
     "react-query": "3.28.0",
     "tailwind-rn": "3.0.1"
   },
